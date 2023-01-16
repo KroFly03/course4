@@ -1,6 +1,7 @@
 from flask_restx import Resource, Namespace
 from dao.models.genre import GenreSchema
 from implemented import genre_service
+from flask import request
 
 genre_ns = Namespace('genres')
 
@@ -12,7 +13,8 @@ genres_schema = GenreSchema(many=True)
 class GenresView(Resource):
     def get(self):
         try:
-            all_genres = genre_service.get_all()
+            args = request.args
+            all_genres = genre_service.get_all(args)
             return genres_schema.dump(all_genres), 200
         except Exception:
             return "Not found", 404

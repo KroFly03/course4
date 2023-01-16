@@ -1,6 +1,7 @@
 from flask_restx import Resource, Namespace
 from dao.models.director import DirectorSchema
 from implemented import director_service
+from flask import request
 
 director_ns = Namespace('directors')
 
@@ -12,7 +13,8 @@ directors_schema = DirectorSchema(many=True)
 class DirectorsView(Resource):
     def get(self):
         try:
-            all_directors = director_service.get_all()
+            args = request.args
+            all_directors = director_service.get_all(args)
             return directors_schema.dump(all_directors), 200
         except Exception:
             return "Not found", 404

@@ -1,3 +1,4 @@
+from config import Config
 from dao.movie import MovieDAO
 
 
@@ -12,9 +13,14 @@ class MovieService:
         status = args.get('status')
         page = args.get('page')
 
-        if status is not None and status == 'new':
+        is_status_enter = status is not None and status == 'new'
+        is_page_enter = page is not None
+
+        if is_status_enter and is_page_enter:
+            return self.dao.get_all_newest_by_page((int(page)-1)*Config.ITEMS_PER_PAGE)
+        if is_status_enter:
             return self.dao.get_all_newest()
-        if page is not None:
-            return self.dao.get_all_by_page((page-1)*12)
+        if is_page_enter:
+            return self.dao.get_all_by_page((int(page)-1)*Config.ITEMS_PER_PAGE)
         else:
             return self.dao.get_all()
