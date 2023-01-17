@@ -2,7 +2,7 @@ from dao.user_movies import UserMoviesDAO
 from dao.models.user_movies import UserMovies
 
 
-class MovieService:
+class UserMoviesService:
     def __init__(self, dao: UserMoviesDAO):
         self.dao = dao
 

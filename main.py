@@ -8,6 +8,7 @@ from views.director import director_ns
 from views.genre import genre_ns
 from views.movie import movie_ns
 from views.user import user_ns
+#from views.user_movies import favourites_ns
 
 
 def create_app(config):
@@ -28,6 +29,7 @@ def configure_app(application):
     api.add_namespace(movie_ns)
     api.add_namespace(auth_ns)
     api.add_namespace(user_ns)
+    #api.add_namespace(favourites_ns)
 
 
 if __name__ == '__main__':

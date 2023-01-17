@@ -40,6 +40,6 @@ class UserUpdatePasswordView(Resource):
             data = request.json
             user = user_service.reset_password(data)
 
-            return user_schema.dump(user), 200
+            return user_schema.dump(user), 204
         except Exception as ex:
             return "Not found "+str(ex), 404
