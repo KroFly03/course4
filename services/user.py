@@ -19,8 +19,9 @@ class UserService:
         user = User(**data)
         return self.dao.create(user)
 
-    def patch(self, id, data):
-        user = self.get_one(id)
+    def patch(self, data):
+        uid = data.get('id')
+        user = self.get_one(uid)
 
         if 'name' in data:
             user.name = data.get('name')
@@ -57,11 +58,10 @@ class UserService:
 
     def reset_password(self, data):
         uid = data.get('id')
-        password1 = data.get('password1')
-        password2 = data.get('password2')
+        old_password = data.get('old_password')
+        new_password = data.get('new_password')
 
-        if password1 == password2:
-            password = self.get_hash(password1)
-            return self.dao.reset_password(uid, password)
+        if self.compare_passwords(self.dao.get_password(uid), old_password):
+            return self.dao.reset_password(uid, self.get_hash(new_password))
 
         raise Exception
