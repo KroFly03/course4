@@ -17,8 +17,8 @@ class MoviesView(Resource):
             args = request.args
             all_movies = movie_service.get_all(args)
             return movies_schema.dump(all_movies), 200
-        except Exception:
-            return "Not found", 404
+        except Exception as ex:
+            return "Not found "+str(ex), 404
 
 
 @movie_ns.route('/<int:mid>')

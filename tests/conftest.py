@@ -23,10 +23,3 @@ def user_dao():
     user_dao.reset_password = MagicMock(return_value=user_3)
 
     return user_dao
-
-
-@pytest.fixture()
-def test_client():
-    app_config = Config()
-    app = main.create_app(app_config)
-    return app.test_client()

@@ -1,23 +1,17 @@
 import pytest
 
-from services.user import UserService
+from dao.models.genre import Genre
 
 
-class TestUserView:
-    @pytest.fixture(autouse=True)
-    def user_service(self, user_dao, test_client):
-        self.user_service = UserService(dao=user_dao)
-        self.test_client = test_client
+class TestGenresView:
+    @pytest.fixture
+    def genre(self, db):
+        obj = Genre(name="genre")
+        db.session.add(obj)
+        db.session.commit()
+        return obj
 
-    # def test_get_one(self):
-    #     response = self.test_client.get('/user', follow_redirects=True, method='GET')
-    #     assert response.status_code == 200
-    #
-    # def test_patch(self):
-    #     response = self.test_client.get('/user', follow_redirects=True, method='PATCH')
-    #     assert response.status_code == 204
-    #
-    # def test_update_password(self):
-    #     response = self.test_client.get('/password', follow_redirects=True, method='PUT')
-    #     assert response.status_code == 204
-    #
+    def test_many(self, client, genre):
+        response = client.get("/genres/")
+        assert response.status_code == 200
+        assert response.json == [{"id": genre.id, "name": genre.name}]

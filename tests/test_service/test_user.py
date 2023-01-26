@@ -53,14 +53,3 @@ class TestUserService:
 
     def test_compare_passwords(self):
         assert self.user_service.compare_passwords(self.user_service.get_hash('password'), 'password')
-
-    # def test_reset_password(self):
-    #     data = {
-    #         "id": 1,
-    #         "old_password": "password3",
-    #         "new_password": "password2"
-    #     }
-    #
-    #     user = self.user_service.reset_password(data)
-    #
-    #     assert user is not None

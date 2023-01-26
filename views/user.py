@@ -13,7 +13,7 @@ users_schema = UserSchema(many=True)
 
 @user_ns.route('/')
 class UserView(Resource):
-    #@auth_required
+    @auth_required
     def get(self):
         try:
             data = request.json
@@ -22,7 +22,7 @@ class UserView(Resource):
         except Exception:
             return "Not found", 404
 
-    #@auth_required
+    @auth_required
     def patch(self):
         try:
             data = request.json
@@ -34,7 +34,7 @@ class UserView(Resource):
 
 @user_ns.route('/password')
 class UserUpdatePasswordView(Resource):
-    #@auth_required
+    @auth_required
     def put(self):
         try:
             data = request.json

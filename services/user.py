@@ -45,6 +45,7 @@ class UserService:
         return self.dao.get_by_email(username)
 
     def compare_passwords(self, password_hash, user_password):
+        print(f'{password_hash} {user_password}')
         decoded_digest = base64.b64decode(password_hash)
 
         hash_digest = hashlib.pbkdf2_hmac(

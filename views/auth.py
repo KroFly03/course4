@@ -15,7 +15,7 @@ class AuthRegisterView(Resource):
     def post(self):
         data = request.json
         print(data)
-        return user_service.create(data)
+        return user_schema.dump(user_service.create(data))
 
 
 @auth_ns.route('/login')
