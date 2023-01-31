@@ -14,7 +14,6 @@ users_schema = UserSchema(many=True)
 class AuthRegisterView(Resource):
     def post(self):
         data = request.json
-        print(data)
         return user_schema.dump(user_service.create(data))
 
 

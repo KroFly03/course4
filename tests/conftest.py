@@ -23,3 +23,4 @@ def user_dao():
     user_dao.reset_password = MagicMock(return_value=user_3)
 
     return user_dao
+
